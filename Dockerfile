@@ -69,7 +69,7 @@ RUN mkdir -p \
 
 RUN chown -R www-data:www-data \
     /var/www/html/storage \
-    /var/www/html/bootstrap/cache \
+    /var/www/html/bootstrap/cache
 
 COPY docker/nginx.conf /etc/nginx/http.d/default.conf
 
