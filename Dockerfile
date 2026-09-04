@@ -67,7 +67,8 @@ RUN mkdir -p \
     /var/www/html/storage/framework/sessions \
     /var/www/html/storage/framework/views \
     /var/www/html/bootstrap/cache \
-    /var/www/html/database
+    /var/www/html/database \
+    && touch /var/www/html/database/database.sqlite
 
 RUN chown -R www-data:www-data \
     /var/www/html/storage \
@@ -78,4 +79,4 @@ COPY docker/nginx.conf /etc/nginx/http.d/default.conf
 
 EXPOSE 10000
 
-CMD ["sh", "-c", "php-fpm -D && nginx -g 'daemon off;'"]
+CMD ["sh", "-c", "php artisan migrate --force && php-fpm -D && nginx -g 'daemon off;'"]
