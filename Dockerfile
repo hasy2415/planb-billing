@@ -46,12 +46,11 @@ RUN apk add --no-cache \
     unzip \
     icu-dev \
     libzip-dev \
-    sqlite \
-    sqlite-dev
+    postgresql-dev
 
 RUN docker-php-ext-install \
     pdo \
-    pdo_sqlite \
+    pdo_pgsql \
     mbstring \
     xml \
     intl \
@@ -66,14 +65,11 @@ RUN mkdir -p \
     /var/www/html/storage/framework/cache \
     /var/www/html/storage/framework/sessions \
     /var/www/html/storage/framework/views \
-    /var/www/html/bootstrap/cache \
-    /var/www/html/database \
-    && touch /var/www/html/database/database.sqlite
+    /var/www/html/bootstrap/cache
 
 RUN chown -R www-data:www-data \
     /var/www/html/storage \
     /var/www/html/bootstrap/cache \
-    /var/www/html/database
 
 COPY docker/nginx.conf /etc/nginx/http.d/default.conf
 
